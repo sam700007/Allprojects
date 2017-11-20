@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+		>
+	<aop:aspectj-autoproxy />
+
+	<bean id="customerService" class="com.raamji.customer.services.CustomerService">
+		<property name="name" value="Yong Mook Kim" />
+		<property name="url" value="http://www.mkyong.com" />
+	</bean>
+
+	<bean id="hijackBeforeMethodBean" class="com.raamji.aop.HijackBeforeMethod" />
+	<bean id="hijackAfterMethodBean" class="com.raamji.aop.HijackAfterMethod" />
+	 <bean id="hijackAroundMethodBean" class="com.raamji.aop.HijackAroundMethod" />
+	
+	<bean id="customerServiceProxy"
+                 class="org.springframework.aop.framework.ProxyFactoryBean">
+
+		<property name="target" ref="customerService" />
+
+		<property name="interceptorNames">
+			<list>
+				<!-- <value>hijackBeforeMethodBean</value>
+				<value>hijackAfterMethodBean</value> -->
+				<value>hijackAroundMethodBean</value>
+			</list>
+		</property>
+	</bean>
+</beans>

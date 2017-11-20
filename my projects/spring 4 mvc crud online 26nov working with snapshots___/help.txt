@@ -1,0 +1,3 @@
+http://localhost:8087/springjpaexample/employee-module
+
+http://howtodoinjava.com/jpa/spring-hibernate-jpa-configuration-example/
